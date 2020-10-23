@@ -10,20 +10,20 @@ accomplish the following things:
 
 ### High-priority
 
-[ ] Terminal UI for choosing a desired solution using Crossterm/Termion/something else
-[ ] Use traits to define solutions, create clean abstractions
-[ ] Don't copy-paste reusable parts from previous days, refactor into module instead
+* [ ] Terminal UI for choosing a desired solution using Crossterm/Termion/something else
+* [ ] Use traits to define solutions, create clean abstractions
+* [ ] Don't copy-paste reusable parts from previous days, refactor into module instead
 
 ### Medium priority
 
-[ ] Find a way to make all files in eg. `solutions/` automatically appear as TUI options (build script?)
-[ ] Set up CI/CD pipeline
-[ ] Benchmarking setup using eg. Criterion
+* [ ] Find a way to make all files in eg. `solutions/` automatically appear as TUI options (build script?)
+* [ ] Set up CI/CD pipeline
+* [ ] Benchmarking setup using eg. Criterion
 
 ### Low priority
 
-[ ] Build a cross-platform binary
+* [ ] Build a cross-platform binary
 
 ### Sure would be nice but not going to happen in a million years
 
-[ ] Compile to WASM and embed in browser
+* [ ] Compile to WASM and embed in browser
