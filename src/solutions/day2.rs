@@ -3,23 +3,23 @@ use parse_display::FromStr;
 const INPUT: &str = include_str!("../inputs/day2");
 
 #[derive(FromStr)]
-#[display("{min}-{max} {character}: {password}")]
+#[display("{lower}-{upper} {character}: {password}")]
 struct PasswordLine {
-    min: usize,
-    max: usize,
+    lower: usize,
+    upper: usize,
     character: char,
     password: String,
 }
 
 fn filter1(entry: &PasswordLine) -> bool {
     let matches = entry.password.matches(entry.character).count();
-    matches >= entry.min && matches <= entry.max
+    matches >= entry.lower && matches <= entry.upper
 }
 
 fn filter2(entry: &PasswordLine) -> bool {
-    let first_match = entry.password.chars().nth(entry.min - 1).unwrap() == entry.character;
-    let second_match = entry.password.chars().nth(entry.max - 1).unwrap() == entry.character;
-    first_match ^ second_match
+    let password_bytes = entry.password.as_bytes();
+    let character_byte = entry.character as u8;
+    (password_bytes[entry.lower - 1] == character_byte) ^ (password_bytes[entry.upper - 1] == character_byte)
 }
 
 pub fn run() {
