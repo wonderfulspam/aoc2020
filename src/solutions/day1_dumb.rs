@@ -13,9 +13,11 @@ pub fn run() {
         }
     }
 
-    for i in entries.iter() {
-        for j in entries.iter() {
-            for k in entries.iter() {
+    for (i_index, i) in entries.iter().enumerate() {
+        for j_index in i_index..entries.len() {
+            let j = entries[j_index];
+            for k_index in j_index..entries.len() {
+                let k = entries[k_index];
                 if i + j + k == TARGET {
                     println!("{}", i * j * k);
                     std::process::exit(0);
