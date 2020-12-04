@@ -30,7 +30,7 @@ fn validate(passport: &HashMap<&str, &str>) -> bool {
                 _ => false
             }
         },
-        "hcl" => v.len() == 7 && v.starts_with("#") && v[1..v.len()].is_ascii(),
+        "hcl" => v.len() == 7 && v.starts_with("#") && v[1..v.len()].chars().all(|c|c.is_ascii_hexdigit()),
         "ecl" => ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"].contains(v),
         "pid" => v.len() == 9 && v.chars().all(char::is_numeric),
         "cid" => true,
