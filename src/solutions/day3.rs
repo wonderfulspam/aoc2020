@@ -10,11 +10,12 @@ pub fn run() {
 }
 
 fn count_trees(slope: (usize, usize)) -> usize {
+    let (x, y) = slope;
     INPUT
         .lines()
-        .step_by(slope.1)
+        .step_by(y)
         .skip(1)
         .enumerate()
-        .filter(|&(index, line)| line.as_bytes()[(index + 1) * slope.0 % line.len()] == '#' as u8)
+        .filter(|&(index, line)| line.as_bytes()[(index + 1) * x % line.len()] == '#' as u8)
         .count()
 }
