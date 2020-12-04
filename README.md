@@ -2,6 +2,8 @@
 
 Solutions for AoC 2020 written in not-very-idiomatic Rust.
 
+Dumb, fast solutions are feature-gated behind a `dumb` flag. Run/compile with `--features dumb`
+to activate.
 
 ## Project goals
 
@@ -10,6 +12,7 @@ accomplish the following things:
 
 ### High-priority
 
+* [x] Optimize for legibility and communication of intent rather than absolute speed
 * [ ] Terminal UI for choosing a desired solution using Crossterm/Termion/something else
 * [ ] Use traits to define solutions, create clean abstractions
 * [ ] Don't copy-paste reusable parts from previous days, refactor into module instead

@@ -4,6 +4,9 @@ version = "0.1.0"
 authors = ["Emil Thorenfeldt <emt@magenta-aps.dk>"]
 edition = "2018"
 
+[features]
+dumb = []
+
 [dependencies]
 itertools = "0.9.0"
 parse-display = "0.4.0"
