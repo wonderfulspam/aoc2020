@@ -11,28 +11,29 @@ struct PasswordLine {
     password: String,
 }
 
-fn filter1(entry: &PasswordLine) -> bool {
-    let matches = entry.password.matches(entry.character).count();
-    matches >= entry.lower && matches <= entry.upper
+fn filter1(p: &PasswordLine) -> bool {
+    let matches = p.password.matches(p.character).count();
+    matches >= p.lower && matches <= p.upper
 }
 
-fn filter2(entry: &PasswordLine) -> bool {
-    let password_bytes = entry.password.as_bytes();
-    let character_byte = entry.character as u8;
-    (password_bytes[entry.lower - 1] == character_byte) ^ (password_bytes[entry.upper - 1] == character_byte)
+fn filter2(p: &PasswordLine) -> bool {
+    let password_bytes = p.password.as_bytes();
+    let char_byte = p.character as u8;
+    (password_bytes[p.lower - 1] == char_byte) ^ (password_bytes[p.upper - 1] == char_byte)
 }
 
 pub fn run() {
     let count = INPUT
         .lines()
         .map(|l| l.parse::<PasswordLine>().unwrap())
-        .filter(|entry| filter1(entry)).count();
+        .filter(|p| filter1(p))
+        .count();
     println!("{}", count);
 
     let count = INPUT
         .lines()
         .map(|l| l.parse::<PasswordLine>().unwrap())
-        .filter(|entry| filter2(entry)).count();
+        .filter(|p| filter2(p))
+        .count();
     println!("{}", count);
-
 }
