@@ -7,7 +7,7 @@ const MANDATORY_KEYS: [&str; 7] = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pi
 fn parse(s: &str) -> Option<HashMap<&str, &str>> {
     let map: HashMap<_, _> = s
         .split_whitespace()
-        .flat_map(|p| p.split(":"))
+        .flat_map(|p| p.split(':'))
         .tuples()
         .collect();
     if MANDATORY_KEYS.iter().all(|k| map.contains_key(k)) {

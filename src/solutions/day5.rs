@@ -5,7 +5,7 @@ pub fn run() {
     println!("{}", max);
 
     let mut seats = seat_iter().collect::<Vec<u32>>();
-    seats.sort();
+    seats.sort_unstable();
     let seat = seats
         .windows(2)
         // Find first pair where difference in seat ID isn't 1
@@ -20,7 +20,7 @@ fn seat_iter() -> impl Iterator<Item = u32> {
         // No need to multiply by 8; adding the last three digits
         // will automatically take care of it
         l.chars().fold(0, |acc, c| match c {
-            'F' | 'L' => (acc << 1) | 0,
+            'F' | 'L' => (acc << 1),
             'B' | 'R' => (acc << 1) | 1,
             _ => unreachable!(),
         })

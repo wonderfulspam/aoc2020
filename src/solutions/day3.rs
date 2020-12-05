@@ -16,6 +16,6 @@ fn count_trees(slope: (usize, usize)) -> usize {
         .step_by(y)
         .skip(1)
         .enumerate()
-        .filter(|&(index, line)| line.as_bytes()[(index + 1) * x % line.len()] == '#' as u8)
+        .filter(|&(index, line)| line.as_bytes()[(index + 1) * x % line.len()] == b'#')
         .count()
 }
