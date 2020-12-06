@@ -22,18 +22,17 @@ fn filter2(p: &PasswordLine) -> bool {
     (password_bytes[p.lower - 1] == char_byte) ^ (password_bytes[p.upper - 1] == char_byte)
 }
 
-pub fn run() {
-    let count = INPUT
+pub fn run() -> (String, String) {
+    let part1 = INPUT
         .lines()
         .map(|l| l.parse::<PasswordLine>().unwrap())
         .filter(|p| filter1(p))
         .count();
-    println!("{}", count);
 
-    let count = INPUT
+    let part2 = INPUT
         .lines()
         .map(|l| l.parse::<PasswordLine>().unwrap())
         .filter(|p| filter2(p))
         .count();
-    println!("{}", count);
+    (part1.to_string(), part2.to_string())
 }

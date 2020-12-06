@@ -42,10 +42,13 @@ fn validate(passport: &HashMap<&str, &str>) -> bool {
     })
 }
 
-pub fn run() {
+pub fn run() -> (String, String) {
     let valid_passports: Vec<HashMap<_, _>> =
         INPUT.split("\n\n").filter_map(|p| parse(p)).collect();
-    println!("{}", valid_passports.len());
-    let actually_valid_passport_count = valid_passports.iter().filter(|&p| validate(p)).count();
-    println!("{}", actually_valid_passport_count);
+    let part1 = valid_passports.len();
+
+    let actually_valid_passports = valid_passports.iter().filter(|&p| validate(p));
+    let part2 = actually_valid_passports.count();
+
+    (part1.to_string(), part2.to_string())
 }
