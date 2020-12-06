@@ -15,7 +15,9 @@ version = "0.1.0"
 dependencies = [
  "criterion",
  "itertools",
+ "lazy_static",
  "parse-display",
+ "regex",
 ]
 
 [[package]]

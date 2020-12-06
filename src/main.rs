@@ -11,6 +11,9 @@ fn main() {
         1 => aoc2020::solutions::day1_dumb::run(),
         2 => aoc2020::solutions::day2::run(),
         3 => aoc2020::solutions::day3::run(),
+        #[cfg(feature = "dumb")]
+        4 => aoc2020::solutions::day4_inlined::run(),
+        #[cfg(not(feature = "dumb"))]
         4 => aoc2020::solutions::day4::run(),
         5 => aoc2020::solutions::day5::run(),
         6 => aoc2020::solutions::day6::run(),
