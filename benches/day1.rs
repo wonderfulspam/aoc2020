@@ -6,12 +6,8 @@ fn bench_steps(c: &mut Criterion) {
 
     let mut group = c.benchmark_group("Solutions");
     group.plot_config(plot_config);
-    group.bench_function("day1", |b| b.iter(|| day1_iterators::run()));
-    group.bench_function("day2", |b| b.iter(|| day2::run()));
-    group.bench_function("day3", |b| b.iter(|| day3::run()));
-    group.bench_function("day4", |b| b.iter(|| day4::run()));
-    group.bench_function("day5", |b| b.iter(|| day5::run()));
-    group.bench_function("day6", |b| b.iter(|| day6_bytes::run()));
+    group.bench_function("day1 combinations", |b| b.iter(|| day1::run()));
+    group.bench_function("day1 iterators", |b| b.iter(|| day1_iterators::run()));
 }
 
 criterion_group!(steps, bench_steps);
