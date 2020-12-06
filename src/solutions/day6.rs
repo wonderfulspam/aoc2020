@@ -3,15 +3,15 @@ use std::collections::HashSet;
 const INPUT: &str = include_str!("../inputs/day6");
 
 fn parse1(s: &str) -> usize {
-    let mut chars: Vec<char> = s.split_whitespace().flat_map(|p| p.chars()).collect();
-    chars.sort_unstable();
-    chars.dedup();
-    chars.len()
+    s.split_whitespace()
+        .flat_map(|p| p.chars())
+        .collect::<HashSet<_>>()
+        .len()
 }
 
 fn parse2(s: &str) -> usize {
     s.split_whitespace()
-        .map(|l| l.chars().collect::<HashSet<char>>())
+        .map(|l| l.chars().collect::<HashSet<_>>())
         // HashSet's BitAnd implementation returns the intersection
         .fold_first(|a, b| &a & &b)
         .unwrap()
