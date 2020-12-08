@@ -2,20 +2,20 @@ use std::collections::HashMap;
 
 const INPUT: &str = include_str!("../inputs/day7");
 
-fn parse(line: &str) -> (String, HashMap<String, u32>) {
+fn parse(line: &str) -> (&str, HashMap<&str, u32>) {
     let (color, rest) = line.split_once(" bags contain ").unwrap();
 
-    let mut contents: HashMap<String, u32> = HashMap::new();
+    let mut contents: HashMap<&str, u32> = HashMap::new();
     if !rest.contains("no other bags") {
         for rule in rest[..rest.len() - 1].split(", ") {
             let (num, color) = rule.split_once(' ').unwrap();
             let (color, _) = color.split_once(" bag").unwrap();
             let count = num.parse::<u32>().unwrap();
 
-            contents.insert(color.to_string(), count);
+            contents.insert(color, count);
         }
     }
-    (color.to_string(), contents)
+    (color, contents)
 }
 
 pub fn run() -> (String, String) {
@@ -30,7 +30,7 @@ pub fn run() -> (String, String) {
     (part1.to_string(), part2.to_string())
 }
 
-fn bags_within(bag_rules: &HashMap<String, HashMap<String, u32>>, needle: &str) -> u32 {
+fn bags_within(bag_rules: &HashMap<&str, HashMap<&str, u32>>, needle: &str) -> u32 {
     1 + bag_rules[needle]
         .iter()
         .map(|(k, v)| v * bags_within(bag_rules, k))
@@ -38,7 +38,7 @@ fn bags_within(bag_rules: &HashMap<String, HashMap<String, u32>>, needle: &str) 
 }
 
 fn contains_bag<'a>(
-    bag_rules: &'a HashMap<String, HashMap<String, u32>>,
+    bag_rules: &'a HashMap<&'a str, HashMap<&'a str, u32>>,
     bag_cache: &mut HashMap<&'a str, bool>,
     bag_name: &'a str,
 ) -> bool {
