@@ -9,7 +9,10 @@ fn main() {
         1 => aoc2020::solutions::day1::run(),
         #[cfg(feature = "alternatives")]
         1 => aoc2020::solutions::day1_iterators::run(),
+        #[cfg(not(feature = "alternatives"))]
         2 => aoc2020::solutions::day2::run(),
+        #[cfg(feature = "alternatives")]
+        2 => aoc2020::solutions::day2_stringsplit::run(),
         3 => aoc2020::solutions::day3::run(),
         #[cfg(feature = "alternatives")]
         4 => aoc2020::solutions::day4_inlined::run(),
