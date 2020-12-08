@@ -20,6 +20,7 @@ fn main() {
         6 => aoc2020::solutions::day6::run(),
         #[cfg(feature = "alternatives")]
         6 => aoc2020::solutions::day6_bytes::run(),
+        8 => aoc2020::solutions::day8::run(),
         _ => unimplemented!("Not done yet!"),
     };
     println!("Part 1: {}\nPart 2: {}", part1, part2);
