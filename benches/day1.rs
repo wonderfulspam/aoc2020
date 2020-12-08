@@ -7,6 +7,7 @@ fn bench_steps(c: &mut Criterion) {
     let mut group = c.benchmark_group("Solutions");
     group.plot_config(plot_config);
     group.bench_function("day1 combinations", |b| b.iter(|| day1::run()));
+    group.bench_function("day1 smart", |b| b.iter(|| day1_iterators_smart::run()));
     group.bench_function("day1 iterators", |b| b.iter(|| day1_iterators::run()));
 }
 

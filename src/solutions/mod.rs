@@ -1,5 +1,6 @@
 pub mod day1;
 pub mod day1_iterators;
+pub mod day1_iterators_smart;
 pub mod day2;
 pub mod day2_stringsplit;
 pub mod day3;

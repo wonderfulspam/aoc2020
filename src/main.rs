@@ -8,7 +8,7 @@ fn main() {
         #[cfg(not(feature = "alternatives"))]
         1 => aoc2020::solutions::day1::run(),
         #[cfg(feature = "alternatives")]
-        1 => aoc2020::solutions::day1_iterators::run(),
+        1 => aoc2020::solutions::day1_iterators_smart::run(),
         #[cfg(not(feature = "alternatives"))]
         2 => aoc2020::solutions::day2::run(),
         #[cfg(feature = "alternatives")]
