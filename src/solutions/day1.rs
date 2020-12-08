@@ -6,15 +6,18 @@ const TARGET: u32 = 2020;
 pub fn run() -> (String, String) {
     let entries: Vec<u32> = INPUT.lines().map(|l| l.parse::<u32>().unwrap()).collect();
 
-    let part1: u32 = find_combination(&entries, 2).iter().copied().product();
-    let part2: u32 = find_combination(&entries, 3).iter().copied().product();
-    (part1.to_string(), part2.to_string())
-}
-
-fn find_combination(entries: &[u32], len: usize) -> Vec<&u32> {
-    entries
+    let (a, b) = entries
         .iter()
-        .combinations(len)
-        .find(|e| e.iter().copied().sum::<u32>() == TARGET)
-        .unwrap()
+        .tuple_combinations()
+        .find(|&(a, b)| a + b == TARGET)
+        .unwrap();
+    let part1 = a * b;
+
+    let (a, b, c) = entries
+        .iter()
+        .tuple_combinations()
+        .find(|&(a, b, c)| a + b + c == TARGET)
+        .unwrap();
+    let part2: u32 = a * b * c;
+    (part1.to_string(), part2.to_string())
 }
