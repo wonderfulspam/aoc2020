@@ -7,6 +7,7 @@ fn bench_steps(c: &mut Criterion) {
     let mut group = c.benchmark_group("Solutions");
     group.plot_config(plot_config);
     group.bench_function("day6 hashset", |b| b.iter(|| day6::run()));
+    group.bench_function("day6 optimized", |b| b.iter(|| day6_optimized::run()));
     group.bench_function("day6 bytes", |b| b.iter(|| day6_bytes::run()));
 }
 

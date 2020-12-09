@@ -9,5 +9,6 @@ pub mod day4_inlined;
 pub mod day5;
 pub mod day6;
 pub mod day6_bytes;
+pub mod day6_optimized;
 pub mod day7;
 pub mod day8;
