@@ -12,3 +12,4 @@ pub mod day6_bytes;
 pub mod day6_optimized;
 pub mod day7;
 pub mod day8;
+pub mod day9;
