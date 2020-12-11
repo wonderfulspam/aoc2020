@@ -15,6 +15,7 @@ fn bench_steps(c: &mut Criterion) {
     group.bench_function("day7", |b| b.iter(|| day7::run()));
     group.bench_function("day8", |b| b.iter(|| day8::run()));
     group.bench_function("day9", |b| b.iter(|| day9::run()));
+    group.bench_function("day10", |b| b.iter(|| day10::run()));
 }
 
 criterion_group!(steps, bench_steps);

@@ -26,6 +26,7 @@ fn main() {
         7 => aoc2020::solutions::day7::run(),
         8 => aoc2020::solutions::day8::run(),
         9 => aoc2020::solutions::day9::run(),
+        10 => aoc2020::solutions::day10::run(),
         _ => unimplemented!("Not done yet!"),
     };
     println!("Part 1: {}\nPart 2: {}", part1, part2);
