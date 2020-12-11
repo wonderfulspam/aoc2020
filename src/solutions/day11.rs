@@ -1,5 +1,3 @@
-use std::collections::HashMap;
-
 const INPUT: &str = include_str!("../inputs/day11");
 const DIRECTIONS: [(isize, isize); 8] = [
     (-1, -1),
@@ -30,10 +28,10 @@ pub fn test_neighbour_map2() {
     let _ = part2_neighbour_map(&grid);
 }
 
-fn part2_neighbour_map(grid: &[Vec<char>]) -> HashMap<(usize, usize), Vec<(usize, usize)>> {
+fn part2_neighbour_map(grid: &[Vec<char>]) -> Vec<((usize, usize), Vec<(usize, usize)>)> {
     grid.iter()
         .enumerate()
-        .map(|(x_index, l)| {
+        .flat_map(|(x_index, l)| {
             l.iter().enumerate().map(move |(y_index, _)| {
                 (
                     (x_index, y_index),
@@ -41,7 +39,6 @@ fn part2_neighbour_map(grid: &[Vec<char>]) -> HashMap<(usize, usize), Vec<(usize
                 )
             })
         })
-        .flatten()
         .collect()
 }
 
@@ -63,10 +60,10 @@ fn part2_neighbour_positions(grid: &[Vec<char>], position: (usize, usize)) -> Ve
         .collect()
 }
 
-fn part1_neighbour_map(grid: &[Vec<char>]) -> HashMap<(usize, usize), Vec<(usize, usize)>> {
+fn part1_neighbour_map(grid: &[Vec<char>]) -> Vec<((usize, usize), Vec<(usize, usize)>)> {
     grid.iter()
         .enumerate()
-        .map(|(x_index, l)| {
+        .flat_map(|(x_index, l)| {
             l.iter().enumerate().map(move |(y_index, _)| {
                 (
                     (x_index, y_index),
@@ -74,7 +71,6 @@ fn part1_neighbour_map(grid: &[Vec<char>]) -> HashMap<(usize, usize), Vec<(usize
                 )
             })
         })
-        .flatten()
         .collect()
 }
 
@@ -93,39 +89,44 @@ fn part1_neighbour_positions(grid: &[Vec<char>], position: (usize, usize)) -> Ve
 
 fn solve<F>(grid: &mut Vec<Vec<char>>, occupied_threshold: usize, neigbour_fn: F) -> usize
 where
-    F: Fn(&[Vec<char>]) -> HashMap<(usize, usize), Vec<(usize, usize)>>,
+    F: Fn(&[Vec<char>]) -> Vec<((usize, usize), Vec<(usize, usize)>)>,
 {
     let mut next_grid = grid.clone();
     let neighbour_map = neigbour_fn(&grid);
+    let row_length = grid[0].len();
     loop {
         let mut has_changed = false;
         for i in 0..grid.len() {
-            for j in 0..grid[0].len() {
+            for j in 0..row_length {
                 let seat = grid[i][j];
                 if seat == '.' {
                     continue;
                 }
-                let neighbours = &neighbour_map[&(i, j)];
-                let should_flip = match seat {
-                    'L' => neighbours
-                        .iter()
-                        .all(|&(x, y)| grid[x as usize][y as usize] != '#'),
-                    '#' => {
-                        neighbours
-                            .iter()
-                            .filter(|&&(x, y)| grid[x as usize][y as usize] == '#')
-                            .count()
-                            >= occupied_threshold
-                    }
-                    _ => unreachable!(),
-                };
-                let c = match (seat, should_flip) {
-                    ('L', true) => '#',
-                    ('#', true) => 'L',
-                    _ => seat,
-                };
-                next_grid[i][j] = c;
-                has_changed |= c != seat;
+                unsafe {
+                    let (_, neighbours) = &neighbour_map.get_unchecked(i * row_length + j);
+                    let should_flip = match seat {
+                        'L' => neighbours.iter().all(|&(x, y)| {
+                            grid.get_unchecked(x as usize).get_unchecked(y as usize) != &'#'
+                        }),
+                        '#' => {
+                            neighbours
+                                .iter()
+                                .filter(|&&(x, y)| {
+                                    grid.get_unchecked(x as usize).get_unchecked(y as usize) == &'#'
+                                })
+                                .count()
+                                >= occupied_threshold
+                        }
+                        _ => unreachable!(),
+                    };
+                    let c = match (seat, should_flip) {
+                        ('L', true) => '#',
+                        ('#', true) => 'L',
+                        _ => seat,
+                    };
+                    next_grid[i][j] = c;
+                    has_changed |= c != seat;
+                }
             }
         }
 
