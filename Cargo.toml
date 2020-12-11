@@ -17,6 +17,9 @@ lazy_static = "1.4.0"
 lto = "fat"
 codegen-units = 1
 
+[profile.bench]
+debug = true
+
 [dev-dependencies]
 criterion = "0.3.3"
 
@@ -38,4 +41,8 @@ harness = false
 
 [[bench]]
 name = "day6"
+harness = false
+
+[[bench]]
+name = "day11"
 harness = false
