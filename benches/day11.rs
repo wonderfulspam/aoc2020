@@ -13,6 +13,7 @@ fn bench_steps(c: &mut Criterion) {
         b.iter(|| day11::test_neighbour_map2())
     });
     group.bench_function("day11 total", |b| b.iter(|| day11::run()));
+    group.bench_function("day11 clean pt 2", |b| b.iter(|| day11_clean::run()));
 }
 
 criterion_group!(steps, bench_steps);
