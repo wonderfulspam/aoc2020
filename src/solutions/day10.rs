@@ -1,5 +1,3 @@
-use std::collections::HashMap;
-
 const INPUT: &str = include_str!("../inputs/day10");
 
 pub fn run() -> (String, String) {
@@ -25,13 +23,13 @@ fn part1(adapters: &[usize]) -> usize {
 }
 
 fn count_paths(adapters: &[usize]) -> usize {
-    let mut map = HashMap::new();
-    map.insert(0, 1);
+    let mut counts = vec![0; *adapters.iter().max().unwrap() + 1];
+    counts[0] = 1;
     for &i in adapters {
-        let ans = map.get(&(i - 1)).unwrap_or(&0)
-            + map.get(&(i - 2)).unwrap_or(&0)
-            + map.get(&(i - 3)).unwrap_or(&0);
-        map.insert(i, ans);
+        let ans = counts.get(i - 1).unwrap_or(&0)
+            + counts.get(i.wrapping_sub(2)).unwrap_or(&0)
+            + counts.get(i.wrapping_sub(3)).unwrap_or(&0);
+        counts[i] = ans;
     }
-    map[adapters.last().unwrap()]
+    counts[*adapters.last().unwrap()]
 }
