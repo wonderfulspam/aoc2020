@@ -26,10 +26,9 @@ fn count_paths(adapters: &[usize]) -> usize {
     let mut counts = vec![0; *adapters.iter().max().unwrap() + 1];
     counts[0] = 1;
     for &i in adapters {
-        let ans = counts.get(i - 1).unwrap_or(&0)
-            + counts.get(i.wrapping_sub(2)).unwrap_or(&0)
-            + counts.get(i.wrapping_sub(3)).unwrap_or(&0);
-        counts[i] = ans;
+        counts[i] = (1..=3).fold(0, |acc, j| {
+            acc + counts.get(i.wrapping_sub(j)).unwrap_or(&0)
+        });
     }
     counts[*adapters.last().unwrap()]
 }
