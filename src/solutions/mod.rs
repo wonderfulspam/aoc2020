@@ -2,6 +2,7 @@ pub mod day1;
 pub mod day10;
 pub mod day11;
 pub mod day12;
+pub mod day13;
 pub mod day1_iterators;
 pub mod day1_iterators_smart;
 pub mod day2;
