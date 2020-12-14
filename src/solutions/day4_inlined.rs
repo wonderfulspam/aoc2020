@@ -1,5 +1,5 @@
+use ahash::AHashMap as HashMap;
 use itertools::Itertools;
-use std::collections::HashMap;
 
 const INPUT: &str = include_str!("../inputs/day4");
 const MANDATORY_KEYS: [&str; 7] = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"];
