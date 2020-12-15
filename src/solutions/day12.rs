@@ -8,7 +8,7 @@ pub fn run() -> (String, String) {
         .map(|l| {
             let (command, amount) = l.split_at(1);
             let amount = amount.parse().unwrap();
-            (command.chars().nth(0).unwrap(), amount)
+            (command.chars().next().unwrap(), amount)
         })
         .collect();
 
