@@ -28,16 +28,13 @@ pub fn test_neighbour_map2() {
     let _ = part2_neighbour_map(&grid);
 }
 
-fn part2_neighbour_map(grid: &[Vec<char>]) -> Vec<((usize, usize), Vec<(usize, usize)>)> {
+fn part2_neighbour_map(grid: &[Vec<char>]) -> Vec<Vec<(usize, usize)>> {
     grid.iter()
         .enumerate()
         .flat_map(|(x_index, l)| {
-            l.iter().enumerate().map(move |(y_index, _)| {
-                (
-                    (x_index, y_index),
-                    part2_neighbour_positions(grid, (x_index, y_index)),
-                )
-            })
+            l.iter()
+                .enumerate()
+                .map(move |(y_index, _)| part2_neighbour_positions(grid, (x_index, y_index)))
         })
         .collect()
 }
@@ -60,16 +57,13 @@ fn part2_neighbour_positions(grid: &[Vec<char>], position: (usize, usize)) -> Ve
         .collect()
 }
 
-fn part1_neighbour_map(grid: &[Vec<char>]) -> Vec<((usize, usize), Vec<(usize, usize)>)> {
+fn part1_neighbour_map(grid: &[Vec<char>]) -> Vec<Vec<(usize, usize)>> {
     grid.iter()
         .enumerate()
         .flat_map(|(x_index, l)| {
-            l.iter().enumerate().map(move |(y_index, _)| {
-                (
-                    (x_index, y_index),
-                    part1_neighbour_positions(grid, (x_index, y_index)),
-                )
-            })
+            l.iter()
+                .enumerate()
+                .map(move |(y_index, _)| part1_neighbour_positions(grid, (x_index, y_index)))
         })
         .collect()
 }
@@ -89,7 +83,7 @@ fn part1_neighbour_positions(grid: &[Vec<char>], position: (usize, usize)) -> Ve
 
 fn solve<F>(grid: &mut Vec<Vec<char>>, occupied_threshold: usize, neigbour_fn: F) -> usize
 where
-    F: Fn(&[Vec<char>]) -> Vec<((usize, usize), Vec<(usize, usize)>)>,
+    F: Fn(&[Vec<char>]) -> Vec<Vec<(usize, usize)>>,
 {
     let mut next_grid = grid.clone();
     let neighbour_map = neigbour_fn(&grid);
@@ -103,7 +97,7 @@ where
                     continue;
                 }
                 unsafe {
-                    let (_, neighbours) = &neighbour_map.get_unchecked(i * row_length + j);
+                    let neighbours = &neighbour_map.get_unchecked(i * row_length + j);
                     let should_flip = match seat {
                         'L' => neighbours.iter().all(|&(x, y)| {
                             grid.get_unchecked(x as usize).get_unchecked(y as usize) != &'#'
