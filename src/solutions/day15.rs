@@ -22,6 +22,21 @@ fn solve_map(input: &[u32], turns: u32) -> u32 {
     })
 }
 
+#[allow(unused)]
+fn solve_30m_vec(input: &[u32]) -> u32 {
+    let mut vec_history: Vec<u32> = vec![0; PART2 as usize];
+    input
+        .iter()
+        .enumerate()
+        .for_each(|(i, &v)| vec_history[v as usize] = i as u32 + 1);
+    (input.len() as u32..PART2).fold(*input.last().unwrap(), |last, index| {
+        let num = &mut vec_history[last as usize];
+        let current = if *num == 0 { 0 } else { index - *num };
+        *num = index;
+        current
+    })
+}
+
 // Split bookkeeping into vec and hash, using a vec for the common (lower) numbers
 fn solve_30m(input: &[u32]) -> u32 {
     let mut vec_history: [u32; BOUNDARY as usize] = [0; BOUNDARY as usize];
