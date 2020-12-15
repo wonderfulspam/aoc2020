@@ -6,8 +6,8 @@ fn bench_steps(c: &mut Criterion) {
 
     let mut group = c.benchmark_group("Solutions");
     group.plot_config(plot_config);
-    group.bench_function("day4 regex", |b| b.iter(|| day4::run()));
-    group.bench_function("day4 inlined", |b| b.iter(|| day4_inlined::run()));
+    group.bench_function("day4 regex", |b| b.iter(day4::run));
+    group.bench_function("day4 inlined", |b| b.iter(day4_inlined::run));
 }
 
 criterion_group!(steps, bench_steps);

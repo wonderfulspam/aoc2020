@@ -6,8 +6,8 @@ fn bench_steps(c: &mut Criterion) {
 
     let mut group = c.benchmark_group("Solutions");
     group.plot_config(plot_config);
-    group.bench_function("day2 parse_display", |b| b.iter(|| day2::run()));
-    group.bench_function("day1 string split", |b| b.iter(|| day2_stringsplit::run()));
+    group.bench_function("day2 parse_display", |b| b.iter(day2::run));
+    group.bench_function("day1 string split", |b| b.iter(day2_stringsplit::run));
 }
 
 criterion_group!(steps, bench_steps);
