@@ -16,21 +16,33 @@ pub fn run() -> (String, String) {
         .skip(1)
         .map(|l| parse_ticket(l))
         .collect();
+    let (part1, valid_tickets) = part1(&rules, &nearby_tickets);
+    let part2 = part2(&rules, &valid_tickets);
+    (part1.to_string(), part2.to_string())
+}
+
+fn part2(rules: &[TicketRule], valid_tickets: &[&Ticket]) -> usize {
+    todo!()
+}
+
+fn part1(rules: &[TicketRule], nearby_tickets: &'a [Ticket]) -> (usize, Vec<&'a Ticket>) {
+    let mut tickets = vec![];
     let part1 = nearby_tickets.iter().fold(0, |acc, ticket| {
-        ticket
+        let val = ticket
             .iter()
             .filter(|field| {
                 rules
                     .iter()
                     .all(|(r1, r2)| !r1.contains(field) && !r2.contains(field))
             })
-            .sum::<usize>()
-            + acc
+            .sum::<usize>();
+        if val == 0 {
+            tickets.push(ticket);
+        }
+        val + acc
     });
-    let part2 = "-";
-    (part1.to_string(), part2.to_string())
+    (part1, tickets)
 }
-
 fn parse_ticket(input: &str) -> Ticket {
     input.split(',').map(|n| n.parse().unwrap()).collect()
 }
