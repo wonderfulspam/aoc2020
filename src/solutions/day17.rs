@@ -54,13 +54,9 @@ fn retain_3d(cube: &Cube, state: &HashSet<Cube>) -> bool {
     neighbours.remove(cube);
     let active_neighbours = &neighbours & state;
     if active {
-        if (2..=3).contains(&active_neighbours.len()) {
-            return true;
-        } else {
-            return false;
-        }
+        (2..=3).contains(&active_neighbours.len())
     } else {
-        return active_neighbours.len() == 3;
+        active_neighbours.len() == 3
     }
 }
 
@@ -83,13 +79,9 @@ fn retain_4d(cube: &Hypercube, state: &HashSet<Hypercube>) -> bool {
     neighbours.remove(cube);
     let active_neighbours = &neighbours & state;
     if active {
-        if (2..=3).contains(&active_neighbours.len()) {
-            return true;
-        } else {
-            return false;
-        }
+        (2..=3).contains(&active_neighbours.len())
     } else {
-        return active_neighbours.len() == 3;
+        active_neighbours.len() == 3
     }
 }
 
