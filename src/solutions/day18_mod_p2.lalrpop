@@ -1,0 +1,23 @@
+// Based on https://lalrpop.github.io/lalrpop/tutorial/004_full_expressions.html
+use std::str::FromStr;
+
+grammar;
+
+pub Expr: u64 = {
+    <l:Expr> "*" <r:Factor> => l * r,
+    Factor,
+};
+
+Factor: u64 = {
+    <l:Factor> "+" <r:Term> => l + r,
+    Term,
+};
+
+Term: u64 = {
+    Num,
+    "(" <Expr> ")",
+};
+
+Num: u64 = {
+    r"[0-9]+" => u64::from_str(<>).unwrap()
+};

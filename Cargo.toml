@@ -3,6 +3,7 @@ name = "aoc2020"
 version = "0.1.0"
 authors = ["Emil Thorenfeldt <emt@magenta-aps.dk>"]
 edition = "2018"
+build = "build.rs"
 
 [features]
 alternatives = []
@@ -13,6 +14,8 @@ parse-display = "0.4.0"
 regex = "1.4.2"
 lazy_static = "1.4.0"
 ahash = "0.6.2"
+lalrpop = "0.19.5"
+lalrpop-util = "0.19.5"
 
 [profile.release]
 lto = "fat"
@@ -48,3 +51,6 @@ harness = false
 [[bench]]
 name = "day11"
 harness = false
+
+[build-dependencies]
+lalrpop = "0.19.5"
