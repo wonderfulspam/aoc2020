@@ -9,10 +9,19 @@ pub fn run() -> (String, String) {
 }
 
 fn part1(nums: &[usize], preamble_length: usize) -> usize {
-    nums.iter().enumerate().skip(preamble_length).find(|&(index, &n)| {
-        let window = &nums[index - preamble_length..index];
-        !window.iter().any(|&v| n.checked_sub(v).map(|x| window.contains(&x)).unwrap_or(false) )
-    }).map(|(_, &v)| v).unwrap()
+    nums.iter()
+        .enumerate()
+        .skip(preamble_length)
+        .find(|&(index, &n)| {
+            let window = &nums[index - preamble_length..index];
+            !window.iter().any(|&v| {
+                n.checked_sub(v)
+                    .map(|x| window.contains(&x))
+                    .unwrap_or(false)
+            })
+        })
+        .map(|(_, &v)| v)
+        .unwrap()
 }
 
 fn part2(nums: &[usize], needle: usize) -> usize {
@@ -41,7 +50,10 @@ mod tests {
 
     #[test]
     fn test_part1() {
-        let nums: Vec<_> = SAMPLE_INPUT.lines().map(|l| l.parse::<usize>().unwrap()).collect();
+        let nums: Vec<_> = SAMPLE_INPUT
+            .lines()
+            .map(|l| l.parse::<usize>().unwrap())
+            .collect();
         let preamble_length = 5;
         let num = part1(&nums, preamble_length);
         assert_eq!(127, num);
@@ -49,7 +61,10 @@ mod tests {
 
     #[test]
     fn test_part2() {
-        let nums: Vec<_> = SAMPLE_INPUT.lines().map(|l| l.parse::<usize>().unwrap()).collect();
+        let nums: Vec<_> = SAMPLE_INPUT
+            .lines()
+            .map(|l| l.parse::<usize>().unwrap())
+            .collect();
         let preamble_length = 5;
         let num = part1(&nums, preamble_length);
         let num = part2(&nums, num);

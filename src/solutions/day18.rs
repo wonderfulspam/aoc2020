@@ -2,8 +2,14 @@ use lalrpop_util::lalrpop_mod;
 
 const INPUT: &str = include_str!("../inputs/day18");
 
-lalrpop_mod!(day18_mod);
-lalrpop_mod!(day18_mod_p2);
+lalrpop_mod!(
+    #[allow(clippy::all)]
+    day18_mod
+);
+lalrpop_mod!(
+    #[allow(clippy::all)]
+    day18_mod_p2
+);
 
 pub fn run() -> (String, String) {
     let parser = day18_mod::ExprParser::new();
