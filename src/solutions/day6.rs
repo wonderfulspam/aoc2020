@@ -13,7 +13,7 @@ fn parse2(s: &str) -> usize {
     s.split_whitespace()
         .map(|l| l.chars().collect::<HashSet<_>>())
         // HashSet's BitAnd implementation returns the intersection
-        .fold_first(|a, b| &a & &b)
+        .reduce(|a, b| &a & &b)
         .unwrap()
         .len()
 }
