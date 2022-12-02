@@ -63,8 +63,7 @@ fn check_pid(v: &str) -> bool {
 }
 
 pub fn run() -> (String, String) {
-    let valid_passports: Vec<HashMap<_, _>> =
-        INPUT.split("\n\n").filter_map(|p| parse(p)).collect();
+    let valid_passports: Vec<HashMap<_, _>> = INPUT.split("\n\n").filter_map(parse).collect();
     let part1 = valid_passports.len();
 
     let actually_valid_passports = valid_passports.iter().filter(|&p| validate(p));

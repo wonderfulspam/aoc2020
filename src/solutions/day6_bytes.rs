@@ -21,8 +21,8 @@ fn parse2(s: &str) -> u32 {
 }
 
 pub fn run() -> (String, String) {
-    let part1 = INPUT.split("\n\n").map(|s| parse1(s)).sum::<u32>();
-    let part2 = INPUT.split("\n\n").map(|s| parse2(s)).sum::<u32>();
+    let part1 = INPUT.split("\n\n").map(parse1).sum::<u32>();
+    let part2 = INPUT.split("\n\n").map(parse2).sum::<u32>();
 
     (part1.to_string(), part2.to_string())
 }

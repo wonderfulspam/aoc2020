@@ -1,7 +1,7 @@
 const INPUT: &str = include_str!("../inputs/day8");
 
 pub fn run() -> (String, String) {
-    let instructions: Vec<Instruction> = INPUT.lines().map(|l| parse_line(l)).collect();
+    let instructions: Vec<Instruction> = INPUT.lines().map(parse_line).collect();
     let instruction_length = instructions.len();
     let mut program = Program::new(instructions);
     let part1 = match program.run(None) {

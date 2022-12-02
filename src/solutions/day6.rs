@@ -19,8 +19,8 @@ fn parse2(s: &str) -> usize {
 }
 
 pub fn run() -> (String, String) {
-    let part1 = INPUT.split("\n\n").map(|s| parse1(s)).sum::<usize>();
-    let part2 = INPUT.split("\n\n").map(|s| parse2(s)).sum::<usize>();
+    let part1 = INPUT.split("\n\n").map(parse1).sum::<usize>();
+    let part2 = INPUT.split("\n\n").map(parse2).sum::<usize>();
 
     (part1.to_string(), part2.to_string())
 }

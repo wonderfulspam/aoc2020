@@ -86,7 +86,7 @@ where
     F: Fn(&[Vec<char>]) -> Vec<Vec<(usize, usize)>>,
 {
     let mut next_grid = grid.clone();
-    let neighbour_map = neigbour_fn(&grid);
+    let neighbour_map = neigbour_fn(grid);
     let row_length = grid[0].len();
     loop {
         let mut has_changed = false;
@@ -100,13 +100,13 @@ where
                     let neighbours = &neighbour_map.get_unchecked(i * row_length + j);
                     let should_flip = match seat {
                         'L' => neighbours.iter().all(|&(x, y)| {
-                            grid.get_unchecked(x as usize).get_unchecked(y as usize) != &'#'
+                            grid.get_unchecked(x).get_unchecked(y) != &'#'
                         }),
                         '#' => {
                             neighbours
                                 .iter()
                                 .filter(|&&(x, y)| {
-                                    grid.get_unchecked(x as usize).get_unchecked(y as usize) == &'#'
+                                    grid.get_unchecked(x).get_unchecked(y) == &'#'
                                 })
                                 .count()
                                 >= occupied_threshold

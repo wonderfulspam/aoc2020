@@ -26,13 +26,13 @@ pub fn run() -> (String, String) {
     let part1 = INPUT
         .lines()
         .map(|l| l.parse::<PasswordLine>().unwrap())
-        .filter(|p| filter1(p))
+        .filter(filter1)
         .count();
 
     let part2 = INPUT
         .lines()
         .map(|l| l.parse::<PasswordLine>().unwrap())
-        .filter(|p| filter2(p))
+        .filter(filter2)
         .count();
     (part1.to_string(), part2.to_string())
 }

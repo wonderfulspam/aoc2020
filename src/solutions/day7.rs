@@ -19,7 +19,7 @@ fn parse(line: &str) -> (&str, HashMap<&str, u32>) {
 }
 
 pub fn run() -> (String, String) {
-    let bag_rules: HashMap<_, HashMap<_, _>> = INPUT.lines().map(|l| parse(l)).collect();
+    let bag_rules: HashMap<_, HashMap<_, _>> = INPUT.lines().map(parse).collect();
     let mut bag_cache = HashMap::new();
     bag_cache.insert("shiny gold", true);
     let part1 = bag_rules
@@ -66,7 +66,7 @@ dark olive bags contain 3 faded blue bags, 4 dotted black bags.
 vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.
 faded blue bags contain no other bags.
 dotted black bags contain no other bags.";
-        let res = input.lines().map(|l| parse(l)).collect::<Vec<_>>();
+        let res = input.lines().map(parse).collect::<Vec<_>>();
         dbg!(res);
     }
 }

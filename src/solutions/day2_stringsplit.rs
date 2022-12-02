@@ -31,7 +31,7 @@ fn parse(s: &str) -> PasswordLine {
 }
 
 pub fn run() -> (String, String) {
-    let password_lines: Vec<PasswordLine> = INPUT.lines().map(|l| parse(l)).collect();
+    let password_lines: Vec<PasswordLine> = INPUT.lines().map(parse).collect();
     let part1 = password_lines.iter().filter(|p| filter1(p)).count();
     let part2 = password_lines.iter().filter(|p| filter2(p)).count();
     (part1.to_string(), part2.to_string())

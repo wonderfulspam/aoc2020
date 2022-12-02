@@ -48,7 +48,7 @@ mod tests {
 
     #[test]
     fn test_part1() {
-        let (departure, busses) = SAMPLE_INPUT.split_once("\n").unwrap();
+        let (departure, busses) = SAMPLE_INPUT.split_once('\n').unwrap();
         let busses: Vec<_> = busses.split(',').filter_map(|s| s.parse().ok()).collect();
         let result = part1(departure.parse().unwrap(), &busses);
         assert_eq!(result, 295);

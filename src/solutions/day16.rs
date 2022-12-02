@@ -14,7 +14,7 @@ pub fn run() -> (String, String) {
         .unwrap()
         .lines()
         .skip(1)
-        .map(|l| parse_ticket(l))
+        .map(parse_ticket)
         .collect();
     let part1 = nearby_tickets.iter().fold(0, |acc, ticket| {
         ticket
@@ -42,11 +42,11 @@ fn parse_rules(input: &str) -> Vec<TicketRule> {
             let (first, last) = l.split_once(" or ").unwrap();
             let first = first.split(' ').last().unwrap();
             let (low1, high1) = first
-                .split_once("-")
+                .split_once('-')
                 .map(|(l, h)| (l.parse().unwrap(), h.parse().unwrap()))
                 .unwrap();
             let (low2, high2) = last
-                .split_once("-")
+                .split_once('-')
                 .map(|(l, h)| (l.parse().unwrap(), h.parse().unwrap()))
                 .unwrap();
             (
